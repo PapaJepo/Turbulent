@@ -11,6 +11,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private TMP_Text TurnText;
 
+    public EventManager EventManager;
     public List<GameObject> CharacterList;
     public int RollAmount = 8;
     private int CurrentCharacter;
@@ -23,7 +24,7 @@ public class TurnManager : MonoBehaviour
         RollAmount += 1;
         CurrentCharacter = 0;
         TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
-
+        //EventManager.GetComponent<EventManager>().
     }
 
     // Update is called once per frame
@@ -56,67 +57,82 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurn()
     {
-       // ResultText.text = "Player " + CurrentCharacter;
+        if (CharacterList.Count != 0)
+        {
 
-        if(AttackCheck == true)
-        {
-            Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Attack);
-            if(Roll == true)
-            {
-                ResultText.text = "Attack Hit!";
-            }
-            else if(Roll == false)
-            {
-                ResultText.text = "Attack Miss! You Lose HP";
-                CharacterList[CurrentCharacter].GetComponent<Character>().Health -= 1;
-            }
-        }
-        else if(RepairCheck == true)
-        {
-            //CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
 
-            Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair);
-            if(Roll == true)
+            // ResultText.text = "Player " + CurrentCharacter;
+
+            if (AttackCheck == true)
             {
-                ResultText.text = "You Repair action worked!";
-                //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Attack, EventManager.GetComponent<EventManager>().AttackChance);
+                if (Roll == true)
+                {
+                    ResultText.text = "Attack Hit!";
+                }
+                else if (Roll == false)
+                {
+                    ResultText.text = "Attack Miss! You Lose HP";
+                    CharacterList[CurrentCharacter].GetComponent<Character>().Health -= 1;
+                }
             }
-            else if(Roll == false)
+            else if (RepairCheck == true)
             {
-                ResultText.text = "You Repair action failed!";
-                // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                //CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+
+                Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
+                if (Roll == true)
+                {
+                    ResultText.text = "You Repair action worked!";
+                    //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                }
+                else if (Roll == false)
+                {
+                    ResultText.text = "You Repair action failed!";
+                    // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                }
             }
-        }
-        else if(RunCheck == true)
-        {
-           // CharacterList[CurrentCharacter].GetComponent<Character>().Health -= 1;
-            Roll = ActionRoll(4);
-            if(Roll == true)
+            else if (RunCheck == true)
             {
-                ResultText.text = "You Run Away!";
+                // CharacterList[CurrentCharacter].GetComponent<Character>().Health -= 1;
+                Roll = ActionRoll(4, EventManager.GetComponent<EventManager>().RunChance);
+                if (Roll == true)
+                {
+                    ResultText.text = "You Run Away!";
+                    CharacterList.Remove(CharacterList[CurrentCharacter]);
+                }
+                else if (Roll == false)
+                {
+                    ResultText.text = "You Can't Escape!";
+                }
             }
-            else if(Roll == false)
+            else
             {
-                ResultText.text = "You Can't Escape!";
+                ResultText.text = "Turn Skipped";
+            }
+
+            AttackCheck = false;
+            RepairCheck = false;
+            RunCheck = false;
+
+            CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
+            TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
+            if(CharacterList.Count == 0)
+            {
+                TurnText.text = "No Players Left";
+
             }
         }
         else
         {
-            ResultText.text = "Turn Skipped";
+            TurnText.text = "No Players Left";
         }
-
-        AttackCheck = false;
-        RepairCheck = false;
-        RunCheck = false;
-
-        CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
-        TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
     }
 
 
-    public bool ActionRoll(int number)
+    public bool ActionRoll(int number,int Chance)
     {
-        int Chance;
+        //int Chance;
         Chance = number + Random.Range(1, RollAmount);
         Debug.Log(Chance);
         if(Chance > 7)

@@ -10,6 +10,7 @@
           <e p="Character.cs" t="Include" />
           <e p="Console.cs" t="Include" />
           <e p="ConsoleTextManager.cs" t="Include" />
+          <e p="EventManager.cs" t="Include" />
           <e p="FocusPoint.cs" t="Include" />
           <e p="ObjectClick.cs" t="Include" />
           <e p="TextFeed.cs" t="Include" />

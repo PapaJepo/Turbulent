@@ -2145,6 +2145,7 @@ MonoBehaviour:
       time...'
   consoleOn: 0
   consoleWindow: {fileID: 1554171921}
+  openCloseButton: {fileID: 0}
 --- !u!114 &1045078047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3272,6 +3273,7 @@ MonoBehaviour:
       time...'
   consoleOn: 0
   consoleWindow: {fileID: 1202916502}
+  openCloseButton: {fileID: 1874748612}
 --- !u!114 &1501796285
 MonoBehaviour:
   m_ObjectHideFlags: 0

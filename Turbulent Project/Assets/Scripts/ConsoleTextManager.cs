@@ -60,4 +60,9 @@ public class ConsoleTextManager : MonoBehaviour
                             "currently available mission logs and there " +
                             "is nothing new to report.");
     }
+
+    void LogForceClose()
+    {
+        consoleLog.Clear();       
+    }
 }

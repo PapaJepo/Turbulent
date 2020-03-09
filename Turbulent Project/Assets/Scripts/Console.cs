@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using TMPro;
 using UnityEngine;
 
 public class Console : MonoBehaviour
@@ -8,6 +9,8 @@ public class Console : MonoBehaviour
     public TextFeed textFeed;
     public bool consoleOn;
     public GameObject consoleWindow;
+
+    public TMP_Text openCloseButton;
 
     private void Start()
     {
@@ -20,7 +23,16 @@ public class Console : MonoBehaviour
         if (consoleOn == false)
         {
             consoleWindow.SetActive(true);
+            FindObjectOfType<ConsoleTextManager>().StartLog(textFeed);
+            consoleOn = true;
+            openCloseButton.text = "Close Mission Log";
         }
-        FindObjectOfType<ConsoleTextManager>().StartLog(textFeed);
+        else if (consoleOn == true)
+        {
+            consoleOn = false;
+            consoleWindow.SetActive(false);
+            openCloseButton.text = "Open Mission Log";
+        }
+        
     }
 }

@@ -19,34 +19,40 @@ public class EventManager : MonoBehaviour
     [Tooltip("Chances for actions suceeding")]
     public int RunChance;
 
+
+    public bool EnemyActive;
     // Start is called before the first frame update
     void Start()
     {
         RandomEvent = Random.Range(0, EventText.Count);
 
         StartEvent.text = EventText[RandomEvent];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        switch(RandomEvent)
+        switch (RandomEvent)
         {
             case 0:
-                AttackChance = 1;
+                AttackChance = 12;
                 RepairChance = 2;
                 RunChance = 3;
+                EnemyActive = true;
                 break;
             case 1:
-                AttackChance = 4;
+                AttackChance = 8;
                 RepairChance = 5;
                 RunChance = 6;
+                EnemyActive = true;
                 break;
             case 2:
                 AttackChance = 7;
                 RepairChance = 8;
                 RunChance = 9;
+                EnemyActive = false;
                 break;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+       
     }
 }

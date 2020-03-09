@@ -6,11 +6,18 @@ using TMPro;
 public class EventManager : MonoBehaviour
 {
     public TMP_Text StartEvent;
+    [Header("Event Text")]
     public List<string> EventText;
     
     int RandomEvent;
-
-    public int AttackChance,RepairChance,RunChance;
+    
+    [Header("Roll Chances")]
+    [Tooltip("Chances for actions suceeding")]
+    public int AttackChance;
+    [Tooltip("Chances for actions suceeding")]
+    public int RepairChance;
+    [Tooltip("Chances for actions suceeding")]
+    public int RunChance;
 
     // Start is called before the first frame update
     void Start()

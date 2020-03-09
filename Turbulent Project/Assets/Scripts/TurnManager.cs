@@ -18,6 +18,8 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private TMP_Text TurnCounter;
 
+
+    public List<GameObject> CharacterUI;
     public int Turn = 1;
     public EventManager EventManager;
     public List<GameObject> CharacterList;
@@ -42,7 +44,7 @@ public class TurnManager : MonoBehaviour
             AttackButtonObject.SetActive(false);
         }
 
-       
+        CharacterUI[CurrentCharacter].SetActive(true);
         //EventManager.GetComponent<EventManager>().
     }
 
@@ -78,8 +80,9 @@ public class TurnManager : MonoBehaviour
     {
         if (CharacterList.Count != 0)
         {
+            CharacterUI[CurrentCharacter].SetActive(false);
             // ResultText.text = "Player " + CurrentCharacter;
-            if(EventManager.GetComponent<EventManager>().EnemyActive == true)
+            if (EventManager.GetComponent<EventManager>().EnemyActive == true)
             {
                 if (AttackCheck == true)
                 {
@@ -103,6 +106,12 @@ public class TurnManager : MonoBehaviour
                     if (Roll == true)
                     {
                         ResultText.text = "You Repair action worked!";
+                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                        {
+                            case 0:
+                                EventManager.GetComponent<EventManager>().Repaired = true;
+                                break;
+                        }
                         //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
                     }
                     else if (Roll == false)
@@ -136,21 +145,40 @@ public class TurnManager : MonoBehaviour
 
                 CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
                 TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
-                if (CharacterList.Count == 0)
-                {
-                    TurnText.text = "No Players Left";
-
-                }
+              
 
                 if (Turn % 2 == 0)
                 {
-                    int AttackPlayer = Random.Range(0, 2);
-                    CharacterList[AttackPlayer].GetComponent<Character>().Health -= 1;
-                    ActionText.text = "The creature attacks " + AttackPlayer;
+
+                    if (CharacterList[0].GetComponent<Character>().Health == CharacterList[1].GetComponent<Character>().Health)
+                    {
+                        int AttackPlayer = Random.Range(0, 2);
+                        if (CharacterList[AttackPlayer].GetComponent<Character>().Health > 0)
+                        {
+                            CharacterList[AttackPlayer].GetComponent<Character>().Health -= 1;
+                            ActionText.text = "The creature attacks " + AttackPlayer;
+
+                        }
+                        else if(CharacterList[AttackPlayer].GetComponent<Character>().Health == 0)
+                        {
+                            ActionText.text = "The creature eats parts of player  " + AttackPlayer;
+                        }
+                        
+
+                    }
+                   
+                 
                 }
                 else
                 {
                     ActionText.text = "The creature eyes you up";
+                }
+
+
+                if (CharacterList.Count == 0)
+                {
+                    TurnText.text = "No Players Left";
+
                 }
             }
             else if(EventManager.GetComponent<EventManager>().EnemyActive == false)
@@ -164,6 +192,13 @@ public class TurnManager : MonoBehaviour
                     if (Roll == true)
                     {
                         ResultText.text = "You Repair action worked!";
+
+                      switch(EventManager.GetComponent<EventManager>().RandomEvent)
+                        {
+                            case 0:
+                                EventManager.GetComponent<EventManager>().Repaired = true;
+                                break;
+                        }
                         //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
                     }
                     else if (Roll == false)
@@ -194,7 +229,7 @@ public class TurnManager : MonoBehaviour
                 AttackCheck = false;
                 RepairCheck = false;
                 RunCheck = false;
-
+               
                 CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
                 TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
                 if (CharacterList.Count == 0)
@@ -202,6 +237,7 @@ public class TurnManager : MonoBehaviour
                     TurnText.text = "No Players Left";
 
                 }
+               
             }
            
         }
@@ -211,6 +247,7 @@ public class TurnManager : MonoBehaviour
         }
         Turn += 1;
         TurnCounter.text = "Turn " + Turn;
+        CharacterUI[CurrentCharacter].SetActive(true);
     }
 
 

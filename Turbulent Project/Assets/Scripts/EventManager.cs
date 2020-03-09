@@ -7,9 +7,12 @@ public class EventManager : MonoBehaviour
 {
     public TMP_Text StartEvent;
     [Header("Event Text")]
+    [Multiline]
     public List<string> EventText;
-    
-    int RandomEvent;
+
+    [SerializeField]
+    private TMP_Text UpdateEvent;
+    public int RandomEvent;
     
     [Header("Roll Chances")]
     [Tooltip("Chances for actions suceeding")]
@@ -19,8 +22,9 @@ public class EventManager : MonoBehaviour
     [Tooltip("Chances for actions suceeding")]
     public int RunChance;
 
-
+    public GameObject TurnManager;
     public bool EnemyActive;
+    public bool Repaired;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +57,17 @@ public class EventManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+       if(RandomEvent == 0 )
+        {
+            if(Repaired == false)
+            {
+                UpdateEvent.text = " " + (7 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left";
+
+            }
+            else if(Repaired == true)
+            {
+                UpdateEvent.text = "Engine was repaired";
+            }
+        }
     }
 }

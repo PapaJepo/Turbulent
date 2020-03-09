@@ -13,7 +13,12 @@ public class TurnManager : MonoBehaviour
     private TMP_Text TurnText;
     [SerializeField]
     private GameObject AttackButtonObject;
+    [SerializeField]
+    private TMP_Text ActionText;
+    [SerializeField]
+    private TMP_Text TurnCounter;
 
+    public int Turn = 1;
     public EventManager EventManager;
     public List<GameObject> CharacterList;
     public int RollAmount = 8;
@@ -24,6 +29,7 @@ public class TurnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TurnCounter.text = "Turn " + Turn;
         RollAmount += 1;
         CurrentCharacter = 0;
         TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
@@ -135,6 +141,17 @@ public class TurnManager : MonoBehaviour
                     TurnText.text = "No Players Left";
 
                 }
+
+                if (Turn % 2 == 0)
+                {
+                    int AttackPlayer = Random.Range(0, 2);
+                    CharacterList[AttackPlayer].GetComponent<Character>().Health -= 1;
+                    ActionText.text = "The creature attacks " + AttackPlayer;
+                }
+                else
+                {
+                    ActionText.text = "The creature eyes you up";
+                }
             }
             else if(EventManager.GetComponent<EventManager>().EnemyActive == false)
             {
@@ -192,6 +209,8 @@ public class TurnManager : MonoBehaviour
         {
             TurnText.text = "No Players Left";
         }
+        Turn += 1;
+        TurnCounter.text = "Turn " + Turn;
     }
 
 

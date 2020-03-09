@@ -39,22 +39,27 @@ public class Character : MonoBehaviour
             case 1:
                 HealthStat.fillAmount = 0.2f;
                 HealthStat.color = LowHP;
+                HealthStat.GetComponent<Animator>().SetFloat("AnimMultiplier", 3);
                 break;
             case 2:
                 HealthStat.fillAmount = 0.4f;
                 HealthStat.color = MidHP;
+                HealthStat.GetComponent<Animator>().SetFloat("AnimMultiplier", 1.5f);
                 break;
             case 3:
                 HealthStat.fillAmount = 0.6f;
                 HealthStat.color = MidHP;
+                HealthStat.GetComponent<Animator>().SetFloat("AnimMultiplier", 1.5f);
                 break;
             case 4:
                 HealthStat.fillAmount = 0.8f;
                 HealthStat.color = HighHP;
+                HealthStat.GetComponent<Animator>().SetFloat("AnimMultiplier", 1);
                 break;
             case 5:
                 HealthStat.fillAmount = 1;
                 HealthStat.color = HighHP;
+                HealthStat.GetComponent<Animator>().SetFloat("AnimMultiplier", 1);
                 break;
 
         }

@@ -8,16 +8,21 @@ public class ObjectClick : MonoBehaviour
 
     private bool changePosition = false;
     public Vector3 defaultPosition;
+    public float cameraRotation;
+
+    public Quaternion target;
     
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        
         if (Input.GetMouseButtonDown(0))
         {
             ClickObject();
@@ -31,12 +36,18 @@ public class ObjectClick : MonoBehaviour
         if (changePosition == true)
         {
             transform.position = Vector3.Lerp(transform.position, fS.whereToFocus, 0.05f);
+            target = Quaternion.Euler(0, transform.rotation.y, transform.rotation.z);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, target,  Time.deltaTime * 5.0f);
         }
 
         if (changePosition == false)
         {
             transform.position = Vector3.Lerp(transform.position, defaultPosition, 0.05f);
+            target = Quaternion.Euler(12, transform.rotation.y, transform.rotation.z);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, target,  Time.deltaTime * 5.0f);
         }
+        
+        transform.rotation = Quaternion.Lerp(transform.rotation, target,  0.05f);
     }
 
     void ClickObject()

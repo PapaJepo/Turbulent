@@ -29,7 +29,7 @@ public class Character : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UIText.text = "Health:" + Health + "\nAttack:" + Attack + "\nRepair:" + Repair;
+        //UIText.text = "Health:" + Health + "\nAttack:" + Attack + "\nRepair:" + Repair;
 
         switch(Health)
         {

@@ -1995,8 +1995,6 @@ MonoBehaviour:
   EventText:
   - The engine is malfuncioning, in 8 turns it will blow up and cause damage to the
     ship and any personel present.
-  - b
-  - c
   UpdateEvent: {fileID: 1878590413}
   RandomEvent: 0
   AttackChance: 0

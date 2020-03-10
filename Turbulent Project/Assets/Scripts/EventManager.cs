@@ -37,7 +37,7 @@ public class EventManager : MonoBehaviour
                 AttackChance = 12;
                 RepairChance = 2;
                 RunChance = 3;
-                EnemyActive = true;
+                EnemyActive = false;
                 break;
             case 1:
                 AttackChance = 8;
@@ -61,7 +61,7 @@ public class EventManager : MonoBehaviour
         {
             if(Repaired == false)
             {
-                UpdateEvent.text = " " + (7 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left";
+                UpdateEvent.text = " " + (7 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left Until the engine fails";
 
             }
             else if(Repaired == true)

@@ -25,9 +25,12 @@ public class TurnManager : MonoBehaviour
     public List<GameObject> CharacterList;
     public int RollAmount = 8;
     private int CurrentCharacter;
-    private bool AttackCheck, RepairCheck, RunCheck;
+    private bool AttackCheck, RepairCheck, RunCheck, Move1Check, Move2Check, Move3Check;
+    private bool Close1, Close2, Close3;
+    private bool UseCheck;
     private bool Result;
     private bool Roll;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +62,10 @@ public class TurnManager : MonoBehaviour
         AttackCheck = true;
         RepairCheck = false;
         RunCheck = false;
+        Move1Check = false;
+        Move2Check = false;
+        Move3Check = false;
+        UseCheck = false;
     }
 
     public void RepairButton()
@@ -66,6 +73,11 @@ public class TurnManager : MonoBehaviour
         AttackCheck = false;
         RepairCheck = true;
         RunCheck = false;
+
+        Move1Check = false;
+        Move2Check = false;
+        Move3Check = false;
+        UseCheck = false;
     }
 
     public void RunButton()
@@ -73,7 +85,58 @@ public class TurnManager : MonoBehaviour
         AttackCheck = false;
         RepairCheck = false;
         RunCheck = true;
+
+        Move1Check = false;
+        Move2Check = false;
+        Move3Check = false;
+        UseCheck = false;
     }
+
+    public void Move1()
+    {
+        AttackCheck = false;
+        RepairCheck = false;
+        RunCheck = false;
+
+        Move1Check = true;
+        Move2Check = false;
+        Move3Check = false;
+        UseCheck = false;
+    }
+    public void Move2()
+    {
+        AttackCheck = false;
+        RepairCheck = false;
+        RunCheck = false;
+
+        Move1Check = false;
+        Move2Check = true;
+        Move3Check = false;
+        UseCheck = false;
+    }
+    public void Move3()
+    {
+        AttackCheck = false;
+        RepairCheck = false;
+        RunCheck = false;
+
+        Move1Check = false;
+        Move2Check = false;
+        Move3Check = true;
+        UseCheck = false;
+    }
+    public void UseButton()
+    {
+        AttackCheck = false;
+        RepairCheck = false;
+        RunCheck = false;
+
+        Move1Check = false;
+        Move2Check = false;
+        Move3Check = false;
+        UseCheck = true;
+    }
+
 
 
     public void EndTurn()
@@ -82,6 +145,11 @@ public class TurnManager : MonoBehaviour
         {
             CharacterUI[CurrentCharacter].SetActive(false);
             // ResultText.text = "Player " + CurrentCharacter;
+
+
+            //Enemy Present
+
+
             if (EventManager.GetComponent<EventManager>().EnemyActive == true)
             {
                 if (AttackCheck == true)
@@ -181,31 +249,63 @@ public class TurnManager : MonoBehaviour
 
                 }
             }
+
+
+
+            //No Enemy
+
+
+
             else if(EventManager.GetComponent<EventManager>().EnemyActive == false)
             {
 
-                if (RepairCheck == true)
+             
+                if(UseCheck == true)
                 {
-                    //CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
 
-                    Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
-                    if (Roll == true)
+                    if (Close2 == true)
                     {
-                        ResultText.text = "You Repair action worked!";
-
-                      switch(EventManager.GetComponent<EventManager>().RandomEvent)
+                        if (EventManager.GetComponent<EventManager>().Repaired == false)
                         {
-                            case 0:
-                                EventManager.GetComponent<EventManager>().Repaired = true;
-                                break;
+                            ResultText.text = "The engine must be repaired before it is restarted";
                         }
-                        //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                        else if(EventManager.GetComponent<EventManager>().Repaired == true)
+                        {
+                            ResultText.text = "You successfully restart the engine";
+                        }
                     }
-                    else if (Roll == false)
+                    else if(Close1 == true)
                     {
-                        ResultText.text = "You Repair action failed!";
-                        // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                       
+                            Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
+                            if (Roll == true)
+                            {
+                                ResultText.text = "You Repair action worked!";
+
+                                switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                                {
+                                    case 0:
+                                        EventManager.GetComponent<EventManager>().Repaired = true;
+                                        break;
+                                }
+                                //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                            }
+                            else if (Roll == false)
+                            {
+                                ResultText.text = "You Repair action failed!";
+                                // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                            }
                     }
+                    else if(Close3 == true)
+                    {
+                        ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
+                    }
+                    else
+                    {
+                        ResultText.text = "There's nothing you can interact with";
+                    }
+
+
                 }
                 else if (RunCheck == true)
                 {
@@ -221,6 +321,27 @@ public class TurnManager : MonoBehaviour
                         ResultText.text = "You Can't Escape!";
                     }
                 }
+                else if(Move1Check == true)
+                {
+                    ResultText.text = "You move to the engine";
+                    Close1 = true;
+                    Close2 = false;
+                    Close3 = false;
+                }
+                else if (Move2Check == true)
+                {
+                    ResultText.text = "You move to the control panel";
+                    Close1 = false;
+                    Close2 = true;
+                    Close3 = false;
+                }
+                else if (Move3Check == true)
+                {
+                    ResultText.text = "You move to the unknown substance";
+                    Close1 = false;
+                    Close2 = false;
+                    Close3 = true;
+                }
                 else
                 {
                     ResultText.text = "Turn Skipped";
@@ -229,7 +350,11 @@ public class TurnManager : MonoBehaviour
                 AttackCheck = false;
                 RepairCheck = false;
                 RunCheck = false;
-               
+                Move1Check = false;
+                Move2Check = false;
+                Move3Check = false;
+                UseCheck = false;
+
                 CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
                 TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
                 if (CharacterList.Count == 0)

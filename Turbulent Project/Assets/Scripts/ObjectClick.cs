@@ -10,6 +10,8 @@ public class ObjectClick : MonoBehaviour
     public Vector3 defaultPosition;
     public float cameraRotation;
 
+    public GameObject mainMonitor;
+
     public Quaternion target;
     
     // Start is called before the first frame update
@@ -66,5 +68,11 @@ public class ObjectClick : MonoBehaviour
                 changePosition = true;
             }
         }
+    }
+
+    public void ViewMainMonitor()
+    {
+        fS = mainMonitor.GetComponent<FocusPoint>();
+        changePosition = true;
     }
 }

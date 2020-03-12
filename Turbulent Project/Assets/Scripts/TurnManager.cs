@@ -231,6 +231,15 @@ public class TurnManager : MonoBehaviour
                                     }
                                     else if (EventManager.GetComponent<EventManager>().Repaired == true)
                                     {
+                                        /*
+                            * 
+                            * 
+                            * Enemy set active here
+                            * 
+                            * 
+                            * 
+                            * 
+                            */
                                         EventManager.GetComponent<EventManager>().Restart = true;
                                         ResultText.text = "You successfully restart the engine";
                                         Creature.SetActive(true);
@@ -390,6 +399,24 @@ public class TurnManager : MonoBehaviour
                     TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
 
 
+
+                    ///////////////////////////////
+                    ///
+
+                    /*
+                     * 
+                     * 
+                     * 
+                     * 
+                     *  Enemy attack works here
+                     * 
+                     * 
+                     * 
+                     * 
+                     * 
+                     */
+
+
                     if (Turn % 2 == 0)
                     {
 
@@ -452,7 +479,15 @@ public class TurnManager : MonoBehaviour
                                     }
                                     else if (EventManager.GetComponent<EventManager>().Repaired == true)
                                     {
-                                        
+                                        /*
+                                         * 
+                                         * 
+                                         * Enemy set active here
+                                         * 
+                                         * 
+                                         * 
+                                         * 
+                                         */
                                         CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "You successfully restart the engine";
                                         EventManager.GetComponent<EventManager>().Restart = true;

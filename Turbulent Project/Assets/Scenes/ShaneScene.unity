@@ -7764,6 +7764,31 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: 109fa2400944249469ac8cf412eb698f, type: 2}
+    - target: {fileID: 5163881046912938172, guid: c3e88c615ed7b7749b116d85d1366d1c,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163881046912938172, guid: c3e88c615ed7b7749b116d85d1366d1c,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163881046912938172, guid: c3e88c615ed7b7749b116d85d1366d1c,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163881046912938172, guid: c3e88c615ed7b7749b116d85d1366d1c,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5468375682952440774, guid: c3e88c615ed7b7749b116d85d1366d1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8258858099815912443, guid: c3e88c615ed7b7749b116d85d1366d1c,
         type: 3}
       propertyPath: m_LocalPosition.x

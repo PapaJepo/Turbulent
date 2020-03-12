@@ -11,6 +11,8 @@ public class WaypointMove : MonoBehaviour
     private Vector3 target;
     private Vector3 movedirection;
     private Vector3 dir;
+
+    public GameObject TurnManagerRef;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,24 +32,38 @@ public class WaypointMove : MonoBehaviour
                 GetComponent<Rigidbody>().velocity = new Vector3(movedirection.x * speed * Time.deltaTime, 0, movedirection.z * speed * Time.deltaTime);
               // GetComponent<Rigidbody>().velocity  = movedirection * speed * Time.deltaTime;
                 transform.LookAt(Waypoints[CurrentWaypoint].position);
+                
                 break;
             case 1:
+               //Debug.Log( Vector3.Distance(target, this.transform.position) < 1);
                 transform.LookAt(Waypoints[CurrentWaypoint].position);
                 transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 dir = transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.05f);
+                if (Vector3.Distance(target, this.transform.position) < 0.5)
+                {
+                    TurnManagerRef.GetComponent<TurnManager>().CharacterAnimations[TurnManagerRef.GetComponent<TurnManager>().CurrentCharacter].SetBool("Walk", false);
+                }
                 break;
             case 2:
                 transform.LookAt(Waypoints[CurrentWaypoint].position);
                 transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 dir = transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.05f);
+                if (Vector3.Distance(target, this.transform.position) < 0.5)
+                {
+                    TurnManagerRef.GetComponent<TurnManager>().CharacterAnimations[TurnManagerRef.GetComponent<TurnManager>().CurrentCharacter].SetBool("Walk", false);
+                }
                 break;
             case 3:
                 transform.LookAt(Waypoints[CurrentWaypoint].position);
                 transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 dir = transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.05f);
+                if (Vector3.Distance(target, this.transform.position) < 0.5)
+                {
+                    TurnManagerRef.GetComponent<TurnManager>().CharacterAnimations[TurnManagerRef.GetComponent<TurnManager>().CurrentCharacter].SetBool("Walk", false);
+                }
                 break;
         }
     }

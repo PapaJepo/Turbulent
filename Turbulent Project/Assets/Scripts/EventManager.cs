@@ -25,6 +25,7 @@ public class EventManager : MonoBehaviour
     public GameObject TurnManager;
     public bool EnemyActive;
     public bool Repaired;
+    public bool Repaired1;
 
     [SerializeField]
     private TMP_Text ButtonText1;
@@ -87,7 +88,7 @@ public class EventManager : MonoBehaviour
 
             if (Repaired == false)
             {
-                UpdateEvent.text = " " + (7 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left Until the engine fails";
+                UpdateEvent.text = " " + (10 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left Until the engine fails";
 
             }
             else if(Repaired == true)
@@ -98,9 +99,9 @@ public class EventManager : MonoBehaviour
        else if(RandomEvent == 1)
         {
             ButtonText1.text = "Perform Action";
-            ButtonText2.text = "Move to 1";
-            ButtonText3.text = "Move to 2";
-            ButtonText4.text = "Move to 3";
+            ButtonText2.text = "Move to MedBay Panel";
+            ButtonText3.text = "Move to Life Support";
+            ButtonText4.text = "Move to Unknown Substance";
         }
     }
 
@@ -109,17 +110,20 @@ public class EventManager : MonoBehaviour
         TurnManager.GetComponent<TurnManager>().CurrentCharacter = 1;
 
         RandomEvent = 1;
-        EnemyActive = true;
+        TurnManager.GetComponent<TurnManager>().TurnText.text = "Player " + (TurnManager.GetComponent<TurnManager>().CurrentCharacter + 1) + "'s turn";
+        
         Scene1.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
-            Scene2.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
-            Scene3.GetComponent<Renderer>().material.mainTexture = Scene3Tex;
+        Scene2.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
+        Scene3.GetComponent<Renderer>().material.mainTexture = Scene3Tex;
         Scene4.GetComponent<Renderer>().material.mainTexture = Scene4Tex;
 
     }
     public void ChangeCameras2()
     {
+
         TurnManager.GetComponent<TurnManager>().CurrentCharacter = 0;
         RandomEvent = 0;
+        TurnManager.GetComponent<TurnManager>().TurnText.text = "Player " + (TurnManager.GetComponent<TurnManager>().CurrentCharacter + 1) + "'s turn";
         Scene1.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
         Scene2.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
         Scene3.GetComponent<Renderer>().material.mainTexture = Scene3Tex;

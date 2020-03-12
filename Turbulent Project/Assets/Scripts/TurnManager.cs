@@ -10,7 +10,7 @@ public class TurnManager : MonoBehaviour
     [SerializeField]
     private TMP_Text ResultText;
     [SerializeField]
-    private TMP_Text TurnText;
+    public TMP_Text TurnText;
     [SerializeField]
     private GameObject AttackButtonObject;
     [SerializeField]
@@ -198,50 +198,98 @@ public class TurnManager : MonoBehaviour
                     }
                     if (UseCheck == true)
                     {
-
-                        if (Close2 == true)
+                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
                         {
-                            if (EventManager.GetComponent<EventManager>().Repaired == false)
-                            {
-                                ResultText.text = "The engine must be repaired before it is restarted";
-                            }
-                            else if (EventManager.GetComponent<EventManager>().Repaired == true)
-                            {
-                                ResultText.text = "You successfully restart the engine";
-                                Creature.SetActive(true);
-                            }
-                        }
-                        else if (Close1 == true)
-                        {
-
-                            Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
-                            if (Roll == true)
-                            {
-                                ResultText.text = "You Repair action worked!";
-
-                                switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                            case 0:
+                                if (Close2 == true)
                                 {
-                                    case 0:
-                                        EventManager.GetComponent<EventManager>().Repaired = true;
-                                        break;
+                                    if (EventManager.GetComponent<EventManager>().Repaired == false)
+                                    {
+                                        ResultText.text = "The engine must be repaired before it is restarted";
+                                    }
+                                    else if (EventManager.GetComponent<EventManager>().Repaired == true)
+                                    {
+                                        ResultText.text = "You successfully restart the engine";
+                                        Creature.SetActive(true);
+                                    }
                                 }
-                                //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
-                            }
-                            else if (Roll == false)
-                            {
-                                ResultText.text = "You Repair action failed!";
-                                // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
-                            }
-                        }
-                        else if (Close3 == true)
-                        {
-                            ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
-                        }
-                        else
-                        {
-                            ResultText.text = "There's nothing you can interact with";
-                        }
+                                else if (Close1 == true)
+                                {
 
+                                    Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
+                                    if (Roll == true)
+                                    {
+                                        ResultText.text = "You Repair action worked!";
+
+                                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                                        {
+                                            case 0:
+                                                EventManager.GetComponent<EventManager>().Repaired = true;
+                                                break;
+                                        }
+                                        //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                                    }
+                                    else if (Roll == false)
+                                    {
+                                        ResultText.text = "You Repair action failed!";
+                                        // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                                    }
+                                }
+                                else if (Close3 == true)
+                                {
+                                    ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
+                                }
+                                else
+                                {
+                                    ResultText.text = "There's nothing you can interact with";
+                                }
+                                break;
+                            case 1:
+                                if (Close2 == true)
+                                {
+                                    /* if (EventManager.GetComponent<EventManager>().Repaired == false)
+                                     {
+                                         ResultText.text = "The engine must be repaired before it is restarted";
+                                     }
+                                     else if (EventManager.GetComponent<EventManager>().Repaired == true)
+                                     {
+                                         ResultText.text = "You successfully restart the engine";
+                                         Creature.SetActive(true);
+                                     }*/
+                                    ResultText.text = "The life support is below average levels but should be fine to reach port, it's detecting abnormal gas readings in the lower levels";
+                                }
+                                else if (Close1 == true)
+                                {
+
+                                    Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
+                                    if (Roll == true)
+                                    {
+                                        ResultText.text = "You Repair action worked!";
+
+                                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                                        {
+                                            case 0:
+                                                EventManager.GetComponent<EventManager>().Repaired = true;
+                                                break;
+                                        }
+                                        //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                                    }
+                                    else if (Roll == false)
+                                    {
+                                        ResultText.text = "You Repair action failed!";
+                                        // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                                    }
+                                }
+                                else if (Close3 == true)
+                                {
+                                    ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
+                                }
+                                else
+                                {
+                                    ResultText.text = "There's nothing you can interact with";
+                                }
+                                break;
+                        }
 
                     }
                     else if (RunCheck == true)
@@ -344,52 +392,102 @@ public class TurnManager : MonoBehaviour
 
                 else if (EventManager.GetComponent<EventManager>().EnemyActive == false)
                 {
-
+                    ActionText.text = "";
 
                     if (UseCheck == true)
                     {
 
-                        if (Close2 == true)
+                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
                         {
-                            if (EventManager.GetComponent<EventManager>().Repaired == false)
-                            {
-                                ResultText.text = "The engine must be repaired before it is restarted";
-                            }
-                            else if (EventManager.GetComponent<EventManager>().Repaired == true)
-                            {
-                                ResultText.text = "You successfully restart the engine";
-                                Creature.SetActive(true);
-                            }
-                        }
-                        else if (Close1 == true)
-                        {
-
-                            Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
-                            if (Roll == true)
-                            {
-                                ResultText.text = "You Repair action worked!";
-
-                                switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                            case 0:
+                                if (Close2 == true)
                                 {
-                                    case 0:
-                                        EventManager.GetComponent<EventManager>().Repaired = true;
-                                        break;
+                                    if (EventManager.GetComponent<EventManager>().Repaired == false)
+                                    {
+                                        ResultText.text = "The engine must be repaired before it is restarted";
+                                    }
+                                    else if (EventManager.GetComponent<EventManager>().Repaired == true)
+                                    {
+                                        ResultText.text = "You successfully restart the engine";
+                                        Creature.SetActive(true);
+                                    }
                                 }
-                                //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
-                            }
-                            else if (Roll == false)
-                            {
-                                ResultText.text = "You Repair action failed!";
-                                // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
-                            }
-                        }
-                        else if (Close3 == true)
-                        {
-                            ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
-                        }
-                        else
-                        {
-                            ResultText.text = "There's nothing you can interact with";
+                                else if (Close1 == true)
+                                {
+
+                                    Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
+                                    if (Roll == true)
+                                    {
+                                        ResultText.text = "You Repair action worked!";
+
+                                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                                        {
+                                            case 0:
+                                                EventManager.GetComponent<EventManager>().Repaired = true;
+                                                break;
+                                        }
+                                        //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                                    }
+                                    else if (Roll == false)
+                                    {
+                                        ResultText.text = "You Repair action failed!";
+                                        // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                                    }
+                                }
+                                else if (Close3 == true)
+                                {
+                                    ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
+                                }
+                                else
+                                {
+                                    ResultText.text = "There's nothing you can interact with";
+                                }
+                                break;
+                            case 1:
+                                if (Close2 == true)
+                                {
+                                    /* if (EventManager.GetComponent<EventManager>().Repaired == false)
+                                     {
+                                         ResultText.text = "The engine must be repaired before it is restarted";
+                                     }
+                                     else if (EventManager.GetComponent<EventManager>().Repaired == true)
+                                     {
+                                         ResultText.text = "You successfully restart the engine";
+                                         Creature.SetActive(true);
+                                     }*/
+                                    ResultText.text = "The life support is below average levels but should be fine to reach port, it's detecting abnormal gas readings in the lower levels";
+                                }
+                                else if (Close1 == true)
+                                {
+
+                                    Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
+                                    if (Roll == true)
+                                    {
+                                        ResultText.text = "You Repair action worked!";
+
+                                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                                        {
+                                            case 0:
+                                                EventManager.GetComponent<EventManager>().Repaired = true;
+                                                break;
+                                        }
+                                        //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                                    }
+                                    else if (Roll == false)
+                                    {
+                                        ResultText.text = "You Repair action failed!";
+                                        // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                                    }
+                                }
+                                else if (Close3 == true)
+                                {
+                                    ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
+                                }
+                                else
+                                {
+                                    ResultText.text = "There's nothing you can interact with";
+                                }
+                                break;
                         }
 
 
@@ -413,28 +511,58 @@ public class TurnManager : MonoBehaviour
                     }
                     else if (Move1Check == true)
                     {
+                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                        {
+                            case 0:
                         CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
                         ResultText.text = "You move to the engine";
+                                break;
+                            case 1:
+                                CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
+                                ResultText.text = "You move to the engine";
+                                break;
+                    
+                    }
                         Close1 = true;
                         Close2 = false;
                         Close3 = false;
                     }
                     else if (Move2Check == true)
                     {
+                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                        {
+                            case 0:
                         CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
                         ResultText.text = "You move to the control panel";
+                                break;
+                            case 1:
+                                CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
+                                ResultText.text = "You move to the Life Support Panel";
+                                break;
+                    }
                         Close1 = false;
                         Close2 = true;
                         Close3 = false;
                     }
                     else if (Move3Check == true)
                     {
+                        switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                        {
+                            case 0:
+                                
                         CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
                         ResultText.text = "You move to the unknown substance";
-                        Close1 = false;
-                        Close2 = false;
-                        Close3 = true;
+                                break;
+                            case 1:
+                                CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
+                                ResultText.text = "You move to the Unkown Substance";
+                                break;
+                       
                     }
+                    Close1 = false;
+                    Close2 = false;
+                    Close3 = true;
+                }
                     else
                     {
                         ResultText.text = "Turn Skipped";

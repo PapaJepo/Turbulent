@@ -1296,6 +1296,7 @@ MonoBehaviour:
   TurnManager: {fileID: 51979644}
   EnemyActive: 0
   Repaired: 0
+  Repaired1: 0
   ButtonText1: {fileID: 1039062713}
   ButtonText2: {fileID: 850236460}
   ButtonText3: {fileID: 1342090014}
@@ -7723,6 +7724,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3975170543621328440, guid: c3e88c615ed7b7749b116d85d1366d1c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4720306436874426911, guid: c3e88c615ed7b7749b116d85d1366d1c,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -9287,6 +9293,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: control-panel2
       objectReference: {fileID: 0}
+    - target: {fileID: -663351959041180446, guid: a393f8c59023e40f18a8c80537a2ceb5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -492420421572216379, guid: a393f8c59023e40f18a8c80537a2ceb5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1598952738356583958, guid: a393f8c59023e40f18a8c80537a2ceb5,
         type: 3}
       propertyPath: m_Name
@@ -9312,6 +9328,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7469484624682501897, guid: a393f8c59023e40f18a8c80537a2ceb5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8051415255134806348, guid: a393f8c59023e40f18a8c80537a2ceb5,
         type: 3}
       propertyPath: m_Name
@@ -9322,6 +9343,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1b9d5e520d0bf0d42a0ce1d6445911c3, type: 2}
+    - target: {fileID: 8909465452568873147, guid: a393f8c59023e40f18a8c80537a2ceb5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9091094862930139297, guid: a393f8c59023e40f18a8c80537a2ceb5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9179517344801119225, guid: a393f8c59023e40f18a8c80537a2ceb5,
         type: 3}
       propertyPath: m_Name

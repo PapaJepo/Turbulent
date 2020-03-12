@@ -57,13 +57,13 @@ public class EventManager : MonoBehaviour
         {
             case 0:
                 AttackChance = 12;
-                RepairChance = 9;
+                RepairChance = 8;
                 RunChance = 3;
                 EnemyActive = false;
                 break;
             case 1:
                 AttackChance = 8;
-                RepairChance = 11;
+                RepairChance = 9;
                 RunChance = 6;
                 EnemyActive = true;
                 break;

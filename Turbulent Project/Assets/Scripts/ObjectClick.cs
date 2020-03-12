@@ -6,18 +6,20 @@ public class ObjectClick : MonoBehaviour
 {
     private FocusPoint fS;
 
-    private bool changePosition = false;
+    public bool changePosition = false;
     public Vector3 defaultPosition;
     public float cameraRotation;
 
     public GameObject mainMonitor;
+    public GameObject consoleMonitor;
 
     public Quaternion target;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        fS = consoleMonitor.GetComponent<FocusPoint>();
+        changePosition = true;
     }
 
     // Update is called once per frame

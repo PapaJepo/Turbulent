@@ -17,7 +17,8 @@ public class TurnManager : MonoBehaviour
     private TMP_Text ActionText;
     [SerializeField]
     private TMP_Text TurnCounter;
- 
+
+    public GameObject Creature;
 
     public List<GameObject> CharacterUI;
     public List<GameObject> CharacterRef;
@@ -27,7 +28,7 @@ public class TurnManager : MonoBehaviour
     public int RollAmount = 8;
 
 
-    private int CurrentCharacter;
+    public int CurrentCharacter;
     private bool AttackCheck, RepairCheck, RunCheck, Move1Check, Move2Check, Move3Check;
     private bool Close1, Close2, Close3;
     private bool UseCheck;
@@ -214,7 +215,7 @@ public class TurnManager : MonoBehaviour
                 RepairCheck = false;
                 RunCheck = false;
 
-                CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
+                //CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
                 TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
               
 
@@ -275,6 +276,7 @@ public class TurnManager : MonoBehaviour
                         else if(EventManager.GetComponent<EventManager>().Repaired == true)
                         {
                             ResultText.text = "You successfully restart the engine";
+                            Creature.SetActive(true);
                         }
                     }
                     else if(Close1 == true)
@@ -364,7 +366,7 @@ public class TurnManager : MonoBehaviour
                 Move3Check = false;
                 UseCheck = false;
 
-                CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
+                //CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
                 TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
                 if (CharacterList.Count == 0)
                 {

@@ -38,8 +38,12 @@ public class EventManager : MonoBehaviour
 
     public GameObject Scene1;
     public GameObject Scene2;
+    public GameObject Scene3;
+    public GameObject Scene4;
     public RenderTexture Scene1Tex;
     public RenderTexture Scene2Tex;
+    public RenderTexture Scene3Tex;
+    public RenderTexture Scene4Tex;
 
 
     // Start is called before the first frame update
@@ -47,7 +51,7 @@ public class EventManager : MonoBehaviour
     {
         RandomEvent = Random.Range(0, EventText.Count);
 
-        StartEvent.text = EventText[RandomEvent];
+        //StartEvent.text = EventText[RandomEvent];
         switch (RandomEvent)
         {
             case 0:
@@ -102,17 +106,43 @@ public class EventManager : MonoBehaviour
 
     public void ChangeCameras()
     {
-     
-            Scene1.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
+        TurnManager.GetComponent<TurnManager>().CurrentCharacter = 1;
+
+        RandomEvent = 1;
+        Scene1.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
             Scene2.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
-        
-       
+            Scene3.GetComponent<Renderer>().material.mainTexture = Scene3Tex;
+        Scene4.GetComponent<Renderer>().material.mainTexture = Scene4Tex;
+
     }
     public void ChangeCameras2()
     {
-
+        TurnManager.GetComponent<TurnManager>().CurrentCharacter = 0;
+        RandomEvent = 0;
         Scene1.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
         Scene2.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
+        Scene3.GetComponent<Renderer>().material.mainTexture = Scene3Tex;
+        Scene4.GetComponent<Renderer>().material.mainTexture = Scene4Tex;
+
+
+    }
+    public void ChangeCameras3()
+    {
+
+        Scene1.GetComponent<Renderer>().material.mainTexture = Scene3Tex;
+        Scene2.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
+        Scene3.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
+        Scene4.GetComponent<Renderer>().material.mainTexture = Scene4Tex;
+
+
+    }
+    public void ChangeCameras4()
+    {
+
+        Scene1.GetComponent<Renderer>().material.mainTexture = Scene4Tex;
+        Scene2.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
+        Scene3.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
+        Scene4.GetComponent<Renderer>().material.mainTexture = Scene3Tex;
 
 
     }

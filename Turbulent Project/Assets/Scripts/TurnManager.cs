@@ -37,6 +37,7 @@ public class TurnManager : MonoBehaviour
 
     public List<Animator> CharacterAnimations;
 
+    public GameObject EndScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +69,7 @@ public class TurnManager : MonoBehaviour
 
         CharacterAnimations[1].SetTrigger("Die");
         ResultText.text = "Game Over";
+        EndScreen.SetActive(true);
         yield return new WaitForSeconds(30f);
     }
     public void AttackButton()
@@ -334,15 +336,27 @@ public class TurnManager : MonoBehaviour
                     }
                     else if (Move1Check == true)
                     {
+                        CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
+
                         CharacterAnimations[CurrentCharacter].SetBool("Walk", true);
                         CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
-                        ResultText.text = "You move to the engine";
+                        switch(EventManager.GetComponent<EventManager>().RandomEvent)
+                        {
+                            case 0:
+                                ResultText.text = "You move to the engine";
+                                break;
+                            case 1:
+                                ResultText.text = "You move to the MedBay controls";
+                                break;
+                        }
                         Close1 = true;
                         Close2 = false;
                         Close3 = false;
                     }
                     else if (Move2Check == true)
                     {
+                        CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
+
                         CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
                         ResultText.text = "You move to the control panel";
                         Close1 = false;
@@ -351,6 +365,8 @@ public class TurnManager : MonoBehaviour
                     }
                     else if (Move3Check == true)
                     {
+                        CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
+
                         CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
                         ResultText.text = "You move to the unknown substance";
                         Close1 = false;
@@ -564,7 +580,7 @@ public class TurnManager : MonoBehaviour
                             case 1:
                                 CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
                                 CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
-                                ResultText.text = "You move to the engine";
+                                ResultText.text = "You move to the MedBay controls";
                                 break;
                     
                     }

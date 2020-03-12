@@ -46,7 +46,7 @@ public class EventManager : MonoBehaviour
     public RenderTexture Scene3Tex;
     public RenderTexture Scene4Tex;
 
-
+    public GameObject EndScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,13 +57,13 @@ public class EventManager : MonoBehaviour
         {
             case 0:
                 AttackChance = 12;
-                RepairChance = 2;
+                RepairChance = 9;
                 RunChance = 3;
                 EnemyActive = false;
                 break;
             case 1:
                 AttackChance = 8;
-                RepairChance = 5;
+                RepairChance = 11;
                 RunChance = 6;
                 EnemyActive = true;
                 break;
@@ -113,6 +113,11 @@ public class EventManager : MonoBehaviour
             {
                 UpdateEvent.text = "Medbay was repaired";
             }
+        }
+
+       if(Repaired == true && Repaired1== true)
+        {
+            EndScreen.SetActive(true);
         }
     }
 

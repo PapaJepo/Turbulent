@@ -192,8 +192,58 @@ public class TurnManager : MonoBehaviour
                         // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
                     }
                 }
+                if (UseCheck == true)
+                {
+
+                    if (Close2 == true)
+                    {
+                        if (EventManager.GetComponent<EventManager>().Repaired == false)
+                        {
+                            ResultText.text = "The engine must be repaired before it is restarted";
+                        }
+                        else if (EventManager.GetComponent<EventManager>().Repaired == true)
+                        {
+                            ResultText.text = "You successfully restart the engine";
+                            Creature.SetActive(true);
+                        }
+                    }
+                    else if (Close1 == true)
+                    {
+
+                        Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
+                        if (Roll == true)
+                        {
+                            ResultText.text = "You Repair action worked!";
+
+                            switch (EventManager.GetComponent<EventManager>().RandomEvent)
+                            {
+                                case 0:
+                                    EventManager.GetComponent<EventManager>().Repaired = true;
+                                    break;
+                            }
+                            //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
+                        }
+                        else if (Roll == false)
+                        {
+                            ResultText.text = "You Repair action failed!";
+                            // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
+                        }
+                    }
+                    else if (Close3 == true)
+                    {
+                        ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
+                    }
+                    else
+                    {
+                        ResultText.text = "There's nothing you can interact with";
+                    }
+
+
+                }
                 else if (RunCheck == true)
                 {
+                    //ResultText.text = "You return to the control room";
+                    /*
                     // CharacterList[CurrentCharacter].GetComponent<Character>().Health -= 1;
                     Roll = ActionRoll(4, EventManager.GetComponent<EventManager>().RunChance);
                     if (Roll == true)
@@ -205,6 +255,31 @@ public class TurnManager : MonoBehaviour
                     {
                         ResultText.text = "You Can't Escape!";
                     }
+                    */
+                }
+                else if (Move1Check == true)
+                {
+                    CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
+                    ResultText.text = "You move to the engine";
+                    Close1 = true;
+                    Close2 = false;
+                    Close3 = false;
+                }
+                else if (Move2Check == true)
+                {
+                    CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
+                    ResultText.text = "You move to the control panel";
+                    Close1 = false;
+                    Close2 = true;
+                    Close3 = false;
+                }
+                else if (Move3Check == true)
+                {
+                    CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
+                    ResultText.text = "You move to the unknown substance";
+                    Close1 = false;
+                    Close2 = false;
+                    Close3 = true;
                 }
                 else
                 {
@@ -214,7 +289,10 @@ public class TurnManager : MonoBehaviour
                 AttackCheck = false;
                 RepairCheck = false;
                 RunCheck = false;
-
+                Move1Check = false;
+                Move2Check = false;
+                Move3Check = false;
+                UseCheck = false;
                 //CurrentCharacter = (CurrentCharacter + 1) % CharacterList.Count;
                 TurnText.text = "Player " + (CurrentCharacter + 1) + "'s turn";
               
@@ -222,22 +300,22 @@ public class TurnManager : MonoBehaviour
                 if (Turn % 2 == 0)
                 {
 
-                    if (CharacterList[0].GetComponent<Character>().Health == CharacterList[1].GetComponent<Character>().Health)
-                    {
-                        int AttackPlayer = Random.Range(0, 2);
-                        if (CharacterList[AttackPlayer].GetComponent<Character>().Health > 0)
+                    //if (CharacterList[0].GetComponent<Character>().Health == CharacterList[1].GetComponent<Character>().Health)
+                    //{
+                        //int AttackPlayer = Random.Range(0, 2);
+                        if (CharacterList[1].GetComponent<Character>().Health > 0)
                         {
-                            CharacterList[AttackPlayer].GetComponent<Character>().Health -= 1;
-                            ActionText.text = "The creature attacks " + AttackPlayer;
+                            CharacterList[1].GetComponent<Character>().Health -= 1;
+                            ActionText.text = "The creature attacks " + 1;
 
                         }
-                        else if(CharacterList[AttackPlayer].GetComponent<Character>().Health == 0)
+                        else if(CharacterList[1].GetComponent<Character>().Health == 0)
                         {
-                            ActionText.text = "The creature eats parts of player  " + AttackPlayer;
+                            ActionText.text = "The creature eats parts of player  " + 1;
                         }
                         
 
-                    }
+                    //}
                    
                  
                 }

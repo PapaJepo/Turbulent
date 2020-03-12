@@ -109,6 +109,7 @@ public class EventManager : MonoBehaviour
         TurnManager.GetComponent<TurnManager>().CurrentCharacter = 1;
 
         RandomEvent = 1;
+        EnemyActive = true;
         Scene1.GetComponent<Renderer>().material.mainTexture = Scene1Tex;
             Scene2.GetComponent<Renderer>().material.mainTexture = Scene2Tex;
             Scene3.GetComponent<Renderer>().material.mainTexture = Scene3Tex;

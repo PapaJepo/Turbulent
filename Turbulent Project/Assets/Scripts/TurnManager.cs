@@ -309,7 +309,7 @@ public class TurnManager : MonoBehaviour
                 }
                 else if (RunCheck == true)
                 {
-                    ResultText.text = "You return to the control room";
+                    //ResultText.text = "You return to the control room";
                     /*
                     // CharacterList[CurrentCharacter].GetComponent<Character>().Health -= 1;
                     Roll = ActionRoll(4, EventManager.GetComponent<EventManager>().RunChance);

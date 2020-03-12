@@ -12,8 +12,6 @@ public class Console : MonoBehaviour
 
     public TMP_Text openCloseButton;
 
-    [SerializeField] private ObjectClick clickScript;
-
     private void Start()
     {
         consoleOn = false;
@@ -34,7 +32,6 @@ public class Console : MonoBehaviour
             consoleOn = false;
             consoleWindow.SetActive(false);
             openCloseButton.text = "Open Mission Log";
-            clickScript.changePosition = false;
         }
         
     }

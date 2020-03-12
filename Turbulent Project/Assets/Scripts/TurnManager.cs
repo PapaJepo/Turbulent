@@ -35,6 +35,8 @@ public class TurnManager : MonoBehaviour
     private bool Result;
     private bool Roll;
 
+    public List<Animator> CharacterAnimations;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,12 +60,16 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((CharacterList[1].GetComponent<Character>().Health <= 0))
-        {
-            ResultText.text = "Game Over";
-        }
+      
     }
 
+    IEnumerator Die()
+    {
+
+        CharacterAnimations[1].SetTrigger("Die");
+        ResultText.text = "Game Over";
+        yield return new WaitForSeconds(30f);
+    }
     public void AttackButton()
     {
         AttackCheck = true;
@@ -148,8 +154,16 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurn()
     {
+      
+
         if (CharacterList.Count != 0)
         {
+
+            if ((CharacterList[1].GetComponent<Character>().Health <= 0))
+            {
+                StartCoroutine("Die");
+            }
+
             if (CharacterList[CurrentCharacter].GetComponent<Character>().Health > 0)
             {
 
@@ -320,6 +334,7 @@ public class TurnManager : MonoBehaviour
                     }
                     else if (Move1Check == true)
                     {
+                        CharacterAnimations[CurrentCharacter].SetBool("Walk", true);
                         CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
                         ResultText.text = "You move to the engine";
                         Close1 = true;
@@ -372,6 +387,7 @@ public class TurnManager : MonoBehaviour
                         }
                         else if (CharacterList[1].GetComponent<Character>().Health == 0)
                         {
+                            CharacterAnimations[CurrentCharacter].SetTrigger("Die");
                             //ActionText.text = "The creature eats parts of player  " + 1;
                             ActionText.text = "Game Over";
                         }
@@ -414,10 +430,12 @@ public class TurnManager : MonoBehaviour
                                 {
                                     if (EventManager.GetComponent<EventManager>().Repaired == false)
                                     {
+                                        CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "The engine must be repaired before it is restarted";
                                     }
                                     else if (EventManager.GetComponent<EventManager>().Repaired == true)
                                     {
+                                        CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "You successfully restart the engine";
                                         Creature.SetActive(true);
                                     }
@@ -428,6 +446,7 @@ public class TurnManager : MonoBehaviour
                                     Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
                                     if (Roll == true)
                                     {
+                                        CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "You Repair action worked!";
 
                                         switch (EventManager.GetComponent<EventManager>().RandomEvent)
@@ -443,16 +462,19 @@ public class TurnManager : MonoBehaviour
                                     }
                                     else if (Roll == false)
                                     {
+                                        CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "You Repair action failed!";
                                         // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
                                     }
                                 }
                                 else if (Close3 == true)
                                 {
+                                    CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                     ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
                                 }
                                 else
                                 {
+                                    CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                     ResultText.text = "There's nothing you can interact with";
                                 }
                                 break;
@@ -468,6 +490,7 @@ public class TurnManager : MonoBehaviour
                                          ResultText.text = "You successfully restart the engine";
                                          Creature.SetActive(true);
                                      }*/
+                                    CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                     ResultText.text = "The life support is below average levels but should be fine to reach port, it's detecting abnormal gas readings in the lower levels";
                                 }
                                 else if (Close1 == true)
@@ -476,6 +499,7 @@ public class TurnManager : MonoBehaviour
                                     Roll = ActionRoll(CharacterList[CurrentCharacter].GetComponent<Character>().Repair, EventManager.GetComponent<EventManager>().RepairChance);
                                     if (Roll == true)
                                     {
+                                        CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "You Repair action worked!";
 
                                         switch (EventManager.GetComponent<EventManager>().RandomEvent)
@@ -491,16 +515,19 @@ public class TurnManager : MonoBehaviour
                                     }
                                     else if (Roll == false)
                                     {
+                                        CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "You Repair action failed!";
                                         // CharacterList[CurrentCharacter].GetComponent<Character>().Repair -= 1;
                                     }
                                 }
                                 else if (Close3 == true)
                                 {
+                                    CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                     ResultText.text = "You have no idea where this unknown substance came from but it looks like it came from the vents";
                                 }
                                 else
                                 {
+                                    CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                     ResultText.text = "There's nothing you can interact with";
                                 }
                                 break;
@@ -530,10 +557,12 @@ public class TurnManager : MonoBehaviour
                         switch (EventManager.GetComponent<EventManager>().RandomEvent)
                         {
                             case 0:
-                        CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
+                                CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
+                                CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
                         ResultText.text = "You move to the engine";
                                 break;
                             case 1:
+                                CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
                                 CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
                                 ResultText.text = "You move to the engine";
                                 break;
@@ -548,10 +577,12 @@ public class TurnManager : MonoBehaviour
                         switch (EventManager.GetComponent<EventManager>().RandomEvent)
                         {
                             case 0:
-                        CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
+                                CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
+                                CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
                         ResultText.text = "You move to the control panel";
                                 break;
                             case 1:
+                                CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
                                 CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
                                 ResultText.text = "You move to the Life Support Panel";
                                 break;
@@ -565,11 +596,12 @@ public class TurnManager : MonoBehaviour
                         switch (EventManager.GetComponent<EventManager>().RandomEvent)
                         {
                             case 0:
-                                
-                        CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
+                                CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
+                                CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
                         ResultText.text = "You move to the unknown substance";
                                 break;
                             case 1:
+                                CharacterAnimations[CurrentCharacter].SetTrigger("Walk 0");
                                 CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
                                 ResultText.text = "You move to the Unkown Substance";
                                 break;

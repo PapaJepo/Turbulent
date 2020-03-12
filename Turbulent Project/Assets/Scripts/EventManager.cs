@@ -26,7 +26,7 @@ public class EventManager : MonoBehaviour
     public bool EnemyActive;
     public bool Repaired;
     public bool Repaired1;
-
+    public bool Restart;
     [SerializeField]
     private TMP_Text ButtonText1;
     [SerializeField]
@@ -57,13 +57,13 @@ public class EventManager : MonoBehaviour
         {
             case 0:
                 AttackChance = 12;
-                RepairChance = 8;
+                RepairChance = 6;
                 RunChance = 3;
                 EnemyActive = false;
                 break;
             case 1:
                 AttackChance = 8;
-                RepairChance = 9;
+                RepairChance = 7;
                 RunChance = 6;
                 EnemyActive = true;
                 break;
@@ -115,7 +115,7 @@ public class EventManager : MonoBehaviour
             }
         }
 
-       if(Repaired == true && Repaired1== true)
+       if(Repaired == true && Repaired1== true && Restart == true)
         {
             EndScreen.SetActive(true);
         }

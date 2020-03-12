@@ -231,6 +231,7 @@ public class TurnManager : MonoBehaviour
                                     }
                                     else if (EventManager.GetComponent<EventManager>().Repaired == true)
                                     {
+                                        EventManager.GetComponent<EventManager>().Restart = true;
                                         ResultText.text = "You successfully restart the engine";
                                         Creature.SetActive(true);
                                     }

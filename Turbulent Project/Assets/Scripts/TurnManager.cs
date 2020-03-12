@@ -17,13 +17,16 @@ public class TurnManager : MonoBehaviour
     private TMP_Text ActionText;
     [SerializeField]
     private TMP_Text TurnCounter;
-
+ 
 
     public List<GameObject> CharacterUI;
+    public List<GameObject> CharacterRef;
     public int Turn = 1;
     public EventManager EventManager;
     public List<GameObject> CharacterList;
     public int RollAmount = 8;
+
+
     private int CurrentCharacter;
     private bool AttackCheck, RepairCheck, RunCheck, Move1Check, Move2Check, Move3Check;
     private bool Close1, Close2, Close3;
@@ -326,6 +329,7 @@ public class TurnManager : MonoBehaviour
                 }
                 else if(Move1Check == true)
                 {
+                    CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 1;
                     ResultText.text = "You move to the engine";
                     Close1 = true;
                     Close2 = false;
@@ -333,6 +337,7 @@ public class TurnManager : MonoBehaviour
                 }
                 else if (Move2Check == true)
                 {
+                    CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 2;
                     ResultText.text = "You move to the control panel";
                     Close1 = false;
                     Close2 = true;
@@ -340,6 +345,7 @@ public class TurnManager : MonoBehaviour
                 }
                 else if (Move3Check == true)
                 {
+                    CharacterRef[CurrentCharacter].GetComponent<WaypointMove>().CurrentWaypoint = 3;
                     ResultText.text = "You move to the unknown substance";
                     Close1 = false;
                     Close2 = false;

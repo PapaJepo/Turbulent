@@ -57,13 +57,13 @@ public class EventManager : MonoBehaviour
         {
             case 0:
                 AttackChance = 12;
-                RepairChance = 6;
+                RepairChance = 5;
                 RunChance = 3;
                 EnemyActive = false;
                 break;
             case 1:
                 AttackChance = 8;
-                RepairChance = 7;
+                RepairChance = 6;
                 RunChance = 6;
                 EnemyActive = true;
                 break;
@@ -106,7 +106,7 @@ public class EventManager : MonoBehaviour
 
             if (Repaired1 == false)
             {
-                UpdateEvent.text = " " + (10 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left Until the MedBay shuts down";
+                UpdateEvent.text = " " + (16 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left Until the MedBay shuts down";
 
             }
             else if (Repaired1 == true)

@@ -452,8 +452,11 @@ public class TurnManager : MonoBehaviour
                                     }
                                     else if (EventManager.GetComponent<EventManager>().Repaired == true)
                                     {
+                                        
                                         CharacterAnimations[CurrentCharacter].SetTrigger("Interact");
                                         ResultText.text = "You successfully restart the engine";
+                                        EventManager.GetComponent<EventManager>().Restart = true;
+                                        EventManager.GetComponent<EventManager>().EnemyActive = true;
                                         Creature.SetActive(true);
                                     }
                                 }

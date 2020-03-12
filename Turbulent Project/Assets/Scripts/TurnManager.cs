@@ -58,7 +58,10 @@ public class TurnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        if ((CharacterList[1].GetComponent<Character>().Health <= 0))
+        {
+            ResultText.text = "Game Over";
+        }
     }
 
     public void AttackButton()
@@ -187,6 +190,9 @@ public class TurnManager : MonoBehaviour
                                 case 0:
                                     EventManager.GetComponent<EventManager>().Repaired = true;
                                     break;
+                                case 1:
+                                    EventManager.GetComponent<EventManager>().Repaired1 = true;
+                                    break;
                             }
                             //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
                         }
@@ -225,6 +231,9 @@ public class TurnManager : MonoBehaviour
                                         {
                                             case 0:
                                                 EventManager.GetComponent<EventManager>().Repaired = true;
+                                                break;
+                                            case 1:
+                                                EventManager.GetComponent<EventManager>().Repaired1 = true;
                                                 break;
                                         }
                                         //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
@@ -363,7 +372,8 @@ public class TurnManager : MonoBehaviour
                         }
                         else if (CharacterList[1].GetComponent<Character>().Health == 0)
                         {
-                            ActionText.text = "The creature eats parts of player  " + 1;
+                            //ActionText.text = "The creature eats parts of player  " + 1;
+                            ActionText.text = "Game Over";
                         }
 
 
@@ -425,6 +435,9 @@ public class TurnManager : MonoBehaviour
                                             case 0:
                                                 EventManager.GetComponent<EventManager>().Repaired = true;
                                                 break;
+                                            case 1:
+                                                EventManager.GetComponent<EventManager>().Repaired1 = true;
+                                                break;
                                         }
                                         //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
                                     }
@@ -469,6 +482,9 @@ public class TurnManager : MonoBehaviour
                                         {
                                             case 0:
                                                 EventManager.GetComponent<EventManager>().Repaired = true;
+                                                break;
+                                            case 1:
+                                                EventManager.GetComponent<EventManager>().Repaired1 = true;
                                                 break;
                                         }
                                         //CharacterList[CurrentCharacter].GetComponent<Character>().Repair += 1;
@@ -597,7 +613,7 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
-            ResultText.text = (" Character is dead");
+           ActionText.text = (" Character is dead");
         }
     }
 

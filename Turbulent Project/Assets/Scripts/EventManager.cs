@@ -102,6 +102,17 @@ public class EventManager : MonoBehaviour
             ButtonText2.text = "Move to MedBay Panel";
             ButtonText3.text = "Move to Life Support";
             ButtonText4.text = "Move to Unknown Substance";
+
+
+            if (Repaired1 == false)
+            {
+                UpdateEvent.text = " " + (10 - TurnManager.GetComponent<TurnManager>().Turn) + " Turns left Until the MedBay shuts down";
+
+            }
+            else if (Repaired1 == true)
+            {
+                UpdateEvent.text = "Medbay was repaired";
+            }
         }
     }
 

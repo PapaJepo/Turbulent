@@ -36,6 +36,7 @@ public class TurnManager : MonoBehaviour
     private bool Roll;
 
     public List<Animator> CharacterAnimations;
+    public List<Animator> MonsterAnimations;
 
     public GameObject EndScreen;
     // Start is called before the first frame update

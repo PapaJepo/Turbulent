@@ -34,14 +34,17 @@ public class TurnManager : MonoBehaviour
     private bool UseCheck;
     private bool Result;
     private bool Roll;
+    public bool Walking = false;
 
     public List<Animator> CharacterAnimations;
-    public List<Animator> MonsterAnimations;
+    //public List<Animator> MonsterAnimations;
+    public Animator Monster;
 
     public GameObject EndScreen;
     // Start is called before the first frame update
     void Start()
     {
+        Walking = false;
         TurnCounter.text = "Turn " + Turn;
         RollAmount += 1;
         CurrentCharacter = 0;
@@ -241,9 +244,19 @@ public class TurnManager : MonoBehaviour
                             * 
                             * 
                             */
+                                       
                                         EventManager.GetComponent<EventManager>().Restart = true;
                                         ResultText.text = "You successfully restart the engine";
                                         Creature.SetActive(true);
+
+                                        if(Walking == false)
+                                        {
+                                            Monster.SetBool("Walk", true);
+                                        }
+                                        else if(Walking == true)
+                                        {
+                                            Monster.SetBool("Walk", false);
+                                        }
                                     }
                                 }
                                 else if (Close1 == true)
@@ -426,6 +439,7 @@ public class TurnManager : MonoBehaviour
                         //int AttackPlayer = Random.Range(0, 2);
                         if (CharacterList[1].GetComponent<Character>().Health > 0)
                         {
+                            Monster.SetTrigger("Attack");
                             CharacterList[1].GetComponent<Character>().Health -= 1;
                             ActionText.text = "The creature attacks " + 1;
 
@@ -494,6 +508,7 @@ public class TurnManager : MonoBehaviour
                                         EventManager.GetComponent<EventManager>().Restart = true;
                                         EventManager.GetComponent<EventManager>().EnemyActive = true;
                                         Creature.SetActive(true);
+                                        Monster.SetBool("Walk", true);
                                     }
                                 }
                                 else if (Close1 == true)

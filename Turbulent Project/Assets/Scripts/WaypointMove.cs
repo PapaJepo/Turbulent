@@ -22,7 +22,14 @@ public class WaypointMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(CurrentWaypoint)
+        if (Vector3.Distance(Waypoints[1].position, this.transform.position) < 0.5)
+        {
+            TurnManagerRef.GetComponent<TurnManager>().Walking = true;
+            Debug.Log("Work now");
+           TurnManagerRef.GetComponent<TurnManager>().Monster.SetBool("Walk", false);
+            TurnManagerRef.GetComponent<TurnManager>().CharacterAnimations[TurnManagerRef.GetComponent<TurnManager>().CurrentCharacter].SetBool("Walk", false);
+        }
+        switch (CurrentWaypoint)
         {
             case 0:
                 target = Waypoints[CurrentWaypoint].position;
@@ -40,10 +47,7 @@ public class WaypointMove : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 dir = transform.position = Vector3.MoveTowards(transform.position, Waypoints[CurrentWaypoint].position, Time.deltaTime * speed);
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.05f);
-                if (Vector3.Distance(target, this.transform.position) < 0.5)
-                {
-                    TurnManagerRef.GetComponent<TurnManager>().CharacterAnimations[TurnManagerRef.GetComponent<TurnManager>().CurrentCharacter].SetBool("Walk", false);
-                }
+             
                 break;
             case 2:
                 transform.LookAt(Waypoints[CurrentWaypoint].position);
